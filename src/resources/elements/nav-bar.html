@@ -1,0 +1,72 @@
+<template bindable="router">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+      <img src="/images/logo.png" />
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <template repeat.for="row of router.navigation">
+          <li if.bind="!row.settings.dropdown"
+            class="nav-item ${row.isActive ? 'active' : ''} ${row.settings.dropdown === row.config.route ? 'dropdown' : ''}">
+            <a href.bind="row.href" class="nav-link">
+              <i class="${row.settings.icon}"></i> ${row.title}
+            </a>
+          </li>
+          <li if.bind="row.settings.dropdown === row.config.route"
+            class="nav-item dropdown ${row.isActive ? 'active' : ''}">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="${row.settings.icon}"></i> ${row.title}
+          </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <template repeat.for="sub of router.navigation">
+                <a if.bind="sub.settings.dropdown !== sub.config.route && row.config.route === sub.settings.dropdown"
+                  href.bind="sub.href" class="dropdown-item">
+                  <i class="${sub.settings.icon}"></i> ${sub.title}
+                </a>
+              </template>
+            </div>
+          </li>
+        </template>
+        <!-- <li if.bind="row.settings.dropdown === row.config.route"
+          class="nav-item dropdown ${row.isActive ? 'active' : ''}">
+          <a href.bind="row.href" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="${row.settings.icon}"></i> ${row.title}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <template repeat.for="sub of router.navigation">
+              <a if.bind="sub.settings.dropdown !== sub.config.route && row.config.route === sub.settings.dropdown"
+                href.bind="sub.href" class="dropdown-item">
+                <i class="${sub.settings.icon}"></i> ${sub.title}
+              </a>
+            </template>
+          </div>
+        </li> -->
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            HOMEOWNERS
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="boardmembers">BOARD OF DIRECTORS</a>
+            <a class="dropdown-item" href="#">GOVERNING DOCUMENTS</a>
+            <a class="dropdown-item" href="#">ARC FORM</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">NEWS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">CONTACT</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">LOGIN</a>
+        </li> -->
+      </ul>
+    </div>
+  </nav>
+</template>
